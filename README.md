@@ -7,7 +7,7 @@ No optimizations exists. Use only for educational purposes.
 
 ## Purposes
 
-Help student with their submission is the main goal of this repository. Do not use this code in production!!!
+Help students with their submission is the main goal of this repository. Do not use this code in production!!!
 
 ## Requirements
 
