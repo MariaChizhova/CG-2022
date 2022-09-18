@@ -35,22 +35,23 @@ void TriangleWindow::init()
 	vbo_.create();
 	vbo_.bind();
 	vbo_.setUsagePattern(QOpenGLBuffer::StaticDraw);
-	vbo_.allocate(vertices.data(), vertices.size() * sizeof(GLfloat));
+	vbo_.allocate(vertices.data(), static_cast<int>(vertices.size() * sizeof(GLfloat)));
 
 	// Create IBO
 	ibo_.create();
 	ibo_.bind();
 	ibo_.setUsagePattern(QOpenGLBuffer::StaticDraw);
-	ibo_.allocate(indices.data(), indices.size() * sizeof(GLuint));
+	ibo_.allocate(indices.data(), static_cast<int>(indices.size() * sizeof(GLuint)));
 
 	// Bind attributes
 	program_->bind();
 
 	program_->enableAttributeArray(0);
-	program_->setAttributeBuffer(0, GL_FLOAT, 0, 2, 5 * sizeof(GLfloat));
+	program_->setAttributeBuffer(0, GL_FLOAT, 0, 2, static_cast<int>(5 * sizeof(GLfloat)));
 
 	program_->enableAttributeArray(1);
-	program_->setAttributeBuffer(1, GL_FLOAT, 2 * sizeof(GLfloat), 3, 5 * sizeof(GLfloat));
+	program_->setAttributeBuffer(1, GL_FLOAT, static_cast<int>(2 * sizeof(GLfloat)), 3,
+								 static_cast<int>(5 * sizeof(GLfloat)));
 
 	matrixUniform_ = program_->uniformLocation("matrix");
 
@@ -74,7 +75,8 @@ void TriangleWindow::render()
 {
 	// Configure viewport
 	const auto retinaScale = devicePixelRatio();
-	glViewport(0, 0, width() * retinaScale, height() * retinaScale);
+	glViewport(0, 0, static_cast<GLint>(width() * retinaScale),
+			   static_cast<GLint>(height() * retinaScale));
 
 	// Clear buffers
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -83,7 +85,8 @@ void TriangleWindow::render()
 	QMatrix4x4 matrix;
 	matrix.perspective(60.0f, 4.0f / 3.0f, 0.1f, 100.0f);
 	matrix.translate(0, 0, -2);
-	matrix.rotate(100.0 * frame_ / screen()->refreshRate(), rotationAxis_);
+	const auto angle = 100.0 * static_cast<double>(frame_) / screen()->refreshRate();
+	matrix.rotate(static_cast<float>(angle), rotationAxis_);
 
 	// Bind VAO and shader program
 	program_->bind();
