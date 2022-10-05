@@ -127,11 +127,11 @@ void FractalWindow::mouseMoveEvent(QMouseEvent * e)
 
 void FractalWindow::wheelEvent(QWheelEvent * e)
 {
-	float oldZoomScale = zoom_;
+	float oldZoom = zoom_;
 	float x = e->pos().x() / width();
 	float y = 1.0f - (e->pos().y() / height());
 	zoom_ = std::max(0.1, zoom_ + e->pixelDelta().y() / 200. * zoom_);
-	globalShift_ = zoom_ / oldZoomScale * (QVector2D(-1, -1) + globalShift_ + 2 * QVector2D(x, y)) - QVector2D(-1, -1) - 2 * QVector2D(x, y);
+	globalShift_ = zoom_ / oldZoom * (QVector2D(-1, -1) + globalShift_ + 2 * QVector2D(x, y)) - QVector2D(-1, -1) - 2 * QVector2D(x, y);
 }
 
 void FractalWindow::setIterations(int iterations)

@@ -17,14 +17,10 @@ Widget::Widget(QWidget *parent) : QWidget(parent)
 	thresholdEdit->setMaximum(150);
 	thresholdEdit->setMinimum(0);
 	thresholdEdit->setValue(2);
-	fpsLabel_ = new QLabel("FPS: ", this);
-	fpsLabelValue_ =  new QLabel("100", this);
 
 	grid->addWidget(iterationsLabel_, 0, 0);
 	grid->addWidget(iterationsEdit, 0, 1);
 	grid->addWidget(thresholdLabel_, 1, 0);
 	grid->addWidget(thresholdEdit, 1, 1);
-	grid->addWidget(fpsLabel_, 2, 0);
-	grid->addWidget(fpsLabelValue_, 2, 1);
 	setLayout(grid);
 }

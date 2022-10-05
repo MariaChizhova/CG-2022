@@ -34,7 +34,8 @@ int main(int argc, char ** argv)
 					 &FractalWindow::setIterations);
 	QObject::connect(widget->thresholdEdit, &QSlider::valueChanged, &window,
 					 &FractalWindow::setThreshold);
-	auto window1 = new QWidget;
+	
+	auto window1 = new QWidget();
 	window1->resize(640, 480);
 	window1->setLayout(layout);
 	window1->show();
