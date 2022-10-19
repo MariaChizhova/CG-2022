@@ -21,4 +21,7 @@ void main() {
             break;
         }
     }
+    if (x * x + y * y <= threshold * threshold) {
+        out_col = vec4(0.0, 0.0, 0.0, 1.0);
+    }
 }

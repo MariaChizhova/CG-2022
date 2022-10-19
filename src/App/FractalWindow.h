@@ -52,7 +52,6 @@ private:
 	QVector2D globalShift_{0., 0.};
 	QVector2D shift_{0., 0.};
 	bool isPressed_ = false;
-	float fps_ = 0;
 	QElapsedTimer time_;
 	QLabel * fpsLabel_;
 };
