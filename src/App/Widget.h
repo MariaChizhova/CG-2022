@@ -12,4 +12,6 @@ public:
 	QLabel *iterationsLabel_;
 	QSlider *thresholdEdit;
 	QSlider *iterationsEdit;
+	QLabel *fpsLabel_;
+	QLabel *fpsLabelValue_;
 };

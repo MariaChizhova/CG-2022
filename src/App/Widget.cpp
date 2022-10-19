@@ -9,7 +9,7 @@ Widget::Widget(QWidget *parent) : QWidget(parent)
 	iterationsEdit = new QSlider(this);
 	iterationsEdit->setOrientation(Qt::Horizontal);
 	iterationsEdit->setMaximum(300);
-	iterationsEdit->setMinimum(0);
+	iterationsEdit->setMinimum(1);
 	iterationsEdit->setValue(100);
 	thresholdLabel_ = new QLabel("Threshold: ", this);
 	thresholdEdit = new QSlider(this);
@@ -17,10 +17,14 @@ Widget::Widget(QWidget *parent) : QWidget(parent)
 	thresholdEdit->setMaximum(150);
 	thresholdEdit->setMinimum(0);
 	thresholdEdit->setValue(2);
+	fpsLabel_ = new QLabel("FPS: ", this);
+	fpsLabelValue_ =  new QLabel(QString::number(0), this);
 
 	grid->addWidget(iterationsLabel_, 0, 0);
 	grid->addWidget(iterationsEdit, 0, 1);
 	grid->addWidget(thresholdLabel_, 1, 0);
 	grid->addWidget(thresholdEdit, 1, 1);
+	grid->addWidget(fpsLabel_, 2, 0);
+	grid->addWidget(fpsLabelValue_, 2, 1);
 	setLayout(grid);
 }

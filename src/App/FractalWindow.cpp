@@ -99,6 +99,12 @@ void FractalWindow::render()
 
 	// Increment frame counter
 	++frame_;
+	int fps = int((double)frame_ / ((double)time_.elapsed() * 0.001));
+	fpsLabel_->setText(QString::number(fps));
+	if (frame_ % 100 != 0) {
+		time_.start();
+		frame_ = 0;
+	}
 }
 
 
