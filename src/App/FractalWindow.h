@@ -14,44 +14,37 @@
 #include <QLabel>
 #include <QVBoxLayout>
 #include <memory>
+#include <unordered_map>
+
+#include "ModelLoader.h"
 
 class FractalWindow final : public fgl::GLWindow
 {
 
 public:
-	explicit FractalWindow(QLabel *fpsLabel): fpsLabel_(fpsLabel){};
+	explicit FractalWindow(QLabel * fpsLabel)
+		: fpsLabel_(fpsLabel){};
 	void init() override;
 	void render() override;
-	void setIterations(int iterations);
-	void setThreshold(float threshold);
-
-protected:
-	void mousePressEvent(QMouseEvent * e) override;
-	void mouseReleaseEvent(QMouseEvent * e) override;
-	void mouseMoveEvent(QMouseEvent * e) override;
-	void wheelEvent(QWheelEvent * e) override;
+	void setMagicTime(int time);
+	void setVertex(bool isVertex);
 
 private:
-	GLint iterationsUniform_ = -1;
-	GLint thresholdUniform_ = -1;
-	GLint zoomUniform_ = -1;
-	GLint shiftUniform_ = -1;
-
-	int iterations_ = 100;
-	float threshold_ = 2.0;
+	int magic_time_ = 0;
+	bool isVertex_ = true;
 
 	QOpenGLBuffer vbo_{QOpenGLBuffer::Type::VertexBuffer};
 	QOpenGLBuffer ibo_{QOpenGLBuffer::Type::IndexBuffer};
 	QOpenGLVertexArrayObject vao_;
 
 	std::unique_ptr<QOpenGLShaderProgram> program_ = nullptr;
+	std::unique_ptr<ModelLoader> model_;
+
+	QVector3D cameraPos_{0, 8, 20};
+	QVector3D lightPos_{2, 4, -4};
+	QVector3D cameraDirection_{0, 0, -10};
 
 	size_t frame_ = 0;
-	QVector2D mousePressPosition_{0., 0.};
-	float zoom_ = 0.5;
-	QVector2D globalShift_{0., 0.};
-	QVector2D shift_{0., 0.};
-	bool isPressed_ = false;
 	QElapsedTimer time_;
 	QLabel * fpsLabel_;
 };
