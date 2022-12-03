@@ -1,19 +1,7 @@
-set(SRCS
-    main.cpp
-    TriangleWindow.cpp
-    TriangleWindow.h
-
-    shaders.qrc
-    Shaders/diffuse.fs
-    Shaders/diffuse.vs
-)
+set(SRCS main.cpp FractalWindow.cpp FractalWindow.h shaders.qrc Shaders/diffuse.fs Shaders/diffuse.vs Widget.cpp Widget.h ModelLoader.cpp)
 
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
 
 add_executable(demo-app ${SRCS})
 
-target_link_libraries(demo-app
-    PRIVATE
-        Qt5::Widgets
-        FGL::Base
-)
+target_link_libraries(demo-app PRIVATE Qt5::Widgets FGL::Base assimp)
